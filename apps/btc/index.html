@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071019">
+  <title>BTC / SENTINEL V3 · Jev 与两路 Laya 对比</title>
+  <link rel="stylesheet" href="/btc/style.css">
+</head>
+<body>
+<div style="padding:10px 24px;color:#b9d7dd;background:#112934;font-size:14px">首次使用：先等待约 60 秒收集真实行情。Jev 为可选路线；配置请运行项目中的 configure.command，保存后重启工作台。</div>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <main class="terminal">
+    <header class="command-bar" id="start">
+      <div class="identity"><span class="identity-mark">₿</span><div><strong>BTC <i>/</i> SENTINEL</strong><small>三路决策对比与两套虚拟账户</small></div></div>
+      <nav class="section-nav" aria-label="BTC 工作台区域"><a href="#start" class="active">看全流程</a><a href="#jev-comparison">三路同题</a><a href="#score-board">看成绩</a><a href="#signal-section">看判断</a><a href="#market-depth">看行情</a><a href="#portfolio-section">看模拟买卖</a><a href="#research-section">看改进</a><a href="#build-guide">学复刻</a></nav>
+      <div class="command-right"><span class="source-pill" id="source-pill"><i></i><span id="source-status">连接中</span></span><span class="teacher-pill">ChatGPT 参与离线设计</span><button type="button" class="mode-btn" id="pause-btn">暂停画面</button><button type="button" class="mode-btn subtle" id="replay-btn">看上一轮</button></div>
+    </header>
+
+    <div class="mode-banner" id="mode-banner" hidden><strong id="mode-banner-title">—</strong><span id="mode-banner-note">—</span><button type="button" id="return-live">返回实时</button></div>
+    <section class="story-guide" aria-label="六步讲解路线">
+      <div class="story-guide-intro"><span class="story-kicker">给第一次看的人 · 六步讲清楚</span><h1>一台电脑猜比特币涨跌，真的有用吗？</h1><p>先看上方三路同题：蓝色直接问本机 Laya，绿色沿用 GPT 离线设计的规则流程，紫色新增云端 Jev。只有蓝绿两路进入原有的虚拟账户。下方流程图展示三路并行判断，以及蓝绿两路的虚拟账户链路。</p><div class="story-key"><span><i class="story-dot blue"></i>蓝：直接问 Laya</span><span><i class="story-dot green"></i>绿：先选方法</span><span><i class="story-dot gold"></i>金：模拟买卖</span></div></div>
+      <div class="story-guide-stage"><div class="story-guide-top"><span id="story-step-count">第 1 步 / 共 6 步</span><span class="story-paper">真实行情 · 模拟资金 · 没有真实下单</span></div><strong id="story-step-title">先看：这台机器怎么工作</strong><p id="story-step-line" aria-live="polite">公开价格先冻结；三路在同一题上限时作答。蓝绿两路另进入原有虚拟账户，Jev 只观察决策。</p><div class="story-guide-controls"><button type="button" id="story-prev" disabled>上一步</button><button type="button" id="story-jump">带我去看 ↗</button><button type="button" id="story-next">下一步 →</button></div></div>
+      <div class="story-guide-steps" role="group" aria-label="选择讲解步骤"><button type="button" class="active" data-story-step="0">1 全流程</button><button type="button" data-story-step="1">2 成绩</button><button type="button" data-story-step="2">3 怎么判断</button><button type="button" data-story-step="3">4 真实行情</button><button type="button" data-story-step="4">5 模拟买卖</button><button type="button" data-story-step="5">6 怎么改进</button></div>
+      <details class="story-glossary"><summary>第一次听到这些词？点开看白话解释</summary><div><p><b>Laya</b>：在这台 Mac 上运行的小模型，负责快速做选择。</p><p><b>ChatGPT</b>：参与离线设计和检查方法；目前没有在每一轮实时发问。</p><p><b>直接版 / 规则版</b>：两位“选手”。前者直接问 Laya；后者先按固定规则选择做法，有时用 Laya。</p><p><b>盘口</b>：当前有人愿意买、有人愿意卖的价格和数量。</p><p><b>胜率</b>：猜对方向的比例；它不等于交易赚钱。</p><p><b>模拟账户</b>：用虚拟资金算买卖和费用，交易所没有收到订单。</p></div></details>
+    </section>
+    <section class="surface jev-comparison" id="jev-comparison" aria-label="三路模型同题比较">
+      <div class="surface-head"><div><span class="index-label">V3 / 新增独立 Jev 观察线</span><h2>同一份冻结行情，三路限时作答</h2></div><span class="engine-pill">Jev 经 Vercel 云端调用</span></div>
+      <p class="jev-explain">蓝色：直接问本机 Laya。绿色：GPT 离线设计的规则流程，部分题由规则决定，部分题由本机 Laya 决定。紫色：新增 Jev，通过云端接口直接回答。三路成绩只计算同一题都在开始前提交、之后又取得有效真实价格的题目。</p>
+      <div class="jev-grid">
+        <article><small>蓝色 · 直接 Laya</small><strong id="tri-blue-choice">等待新题</strong><span id="tri-blue-score">同题成绩待积累</span></article>
+        <article><small>绿色 · 教师框架 Laya</small><strong id="tri-green-choice">等待新题</strong><span id="tri-green-score">同题成绩待积累</span></article>
+        <article class="jev-third"><small>紫色 · Jev 云端</small><strong id="tri-jev-choice">等待 Jev</strong><span id="tri-jev-score">同题成绩待积累</span></article>
+        <article><small>真实结果</small><strong id="tri-truth">等待揭晓</strong><span id="tri-shared-count">三路有效同题 0 道</span></article>
+      </div>
+      <div class="jev-status"><strong id="jev-provider-status">正在检查 Jev 权限</strong><span id="jev-latency">Jev 调用耗时待记录</span><span id="jev-coverage">按时 0 · 超时 0 · 错误 0</span></div>
+      <p class="jev-error" id="jev-error" hidden></p>
+      <p class="jev-explain">上面的判断是当前题；下面是已经揭晓、计入三路累计成绩的最近题目。小样本只用于检查系统是否跑通。</p>
+      <div id="jev-recent" class="jev-recent" aria-label="最近已揭晓的三路同题"><div class="empty-line">等待第一道有效共同题目</div></div>
+      <div class="jev-status"><button type="button" class="mode-btn" id="jev-retry">重新检查 Jev 权限</button><a class="export-link" href="https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dtop-up" target="_blank" rel="noopener">打开 AI Gateway 额度页 ↗</a><span id="jev-retry-note">额度开通后重新检查；只回答之后的新题，不补答旧题。</span></div>
+      <p class="jev-boundary">Jev 只参与方向题比较，没有接入模拟账户；原有两套虚拟账户继续按原规则运行。这里不连接真实交易账户，也不把方向命中率称为盈利能力。</p>
+    </section>
+
+    <section class="surface network-surface" id="overview" aria-label="可聚焦的实时决策与模拟交易网络">
+      <div class="surface-head network-head"><div><span class="index-label" id="network-kicker">LIVE / 真实价格带动的决策地图</span><h2>三路怎样判断，蓝绿怎样模拟买卖</h2></div><div class="network-head-actions"><span class="network-live"><i></i><span id="network-live-text">有新记录才亮起</span></span><strong class="network-price" id="network-price">BTC / USD —</strong><button type="button" id="stage-toggle" class="stage-toggle" aria-pressed="false">放大这一段 ↗</button></div></div>
+      <div class="network-scene-strip" role="group" aria-label="拍摄时聚焦的决策阶段"><button type="button" class="active" data-network-scene="all">看全程</button><button type="button" data-network-scene="market">01 价格从哪来</button><button type="button" data-network-scene="signal">02 三路并行猜涨跌</button><button type="button" data-network-scene="policy">03 能不能买卖</button><button type="button" data-network-scene="execution">04 模拟买卖结果</button><button type="button" data-network-scene="research">05 怎样检验改进</button></div>
+      <div class="network-inspector"><div class="network-inspector-leading"><span class="network-inspector-eyebrow" id="network-scene-label">全流程 / 每一步都能点开</span><strong id="network-inspector-title">沿着光线往下看，它怎么做决定</strong><p id="network-inspector-detail">同一份公开行情先冻结，蓝绿紫三路分别交答案，再由真实价格核对；蓝绿两路另进入模拟买卖检查。</p></div><div class="network-inspector-readout"><small>点开后看这里</small><strong id="network-inspector-value">等待实时状态</strong><span id="network-scene-summary">真实行情 → 猜涨跌 → 验证 → 模拟买卖 → 检验改进</span></div></div>
+      <div class="network-stage"><svg id="network-svg" viewBox="0 0 1000 3040" preserveAspectRatio="xMidYMid meet" role="img" aria-label="从真实价格、蓝绿紫三路并行猜涨跌、蓝绿两路检查模拟买卖，到未来新方法测试的完整过程。每个图形都能点开看实际记录；亮点随新数据出现。"><defs><filter id="network-glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g id="network-backplane"></g><g id="network-edge-layer"></g><g id="network-particles"></g><g id="network-node-layer"></g></svg></div>
+      <div class="network-footer"><span><i class="network-ledger-dot"></i>亮点代表新数据或真实发生的步骤</span><span id="network-last-event">等待本机事件</span><strong id="network-boundary">每 5 秒猜方向；每 30 秒评估一次模拟账户；没有真实下单</strong></div>
+    </section>
+
+    <section class="status-strip" id="market-status" aria-label="市场与系统状态">
+      <div class="quote-block"><div class="quote-symbol"><span class="coin-icon">₿</span><div><strong>BTC <em>/ USD</em></strong><small>KRAKEN SPOT · 公开行情</small></div></div><div class="quote-number"><strong id="last-price">—</strong><span id="quote-change">最近成交价</span></div></div>
+      <div class="status-stat"><span>上次收到价格</span><strong id="feed-age">—</strong><small id="feed-note">等待行情</small></div>
+      <div class="status-stat"><span>上次真实成交</span><strong id="trade-age">—</strong><small id="trade-note">等待新成交</small></div>
+      <div class="status-stat"><span>上次买卖报价</span><strong id="book-age">—</strong><small id="book-note">等待报价</small></div>
+      <div class="status-stat model-stat"><span>这台电脑上的 Laya</span><strong id="model-status">等待</strong><small id="model-note">本机运行</small></div>
+      <div class="tempo-stat"><div><span>下一次猜涨跌</span><strong id="countdown-5">—</strong></div><div class="tempo-track"><i id="tempo-fill"></i></div><small>每 5 秒判断一次方向</small></div>
+    </section>
+
+    <section class="performance-board" id="score-board" aria-label="当前版本的真实成绩单">
+      <div class="performance-head"><div><span class="index-label">第二步 / 看结果</span><h2>猜对多少次？模拟买卖后还剩多少钱？</h2></div><span id="score-scope">只比较两种方法都来得及回答、且有真实结果的同一批题</span></div>
+      <div class="performance-grid">
+        <article class="performance-card baseline-score"><span>蓝色 · 直接问 Laya 的猜对率</span><strong id="score-v0">—</strong><small id="score-v0-detail">等待有结果的题目</small><div class="score-track"><i id="score-v0-bar"></i></div></article>
+        <article class="performance-card optimized-score"><span>绿色 · 先选方法的猜对率</span><strong id="score-v2">—</strong><small id="score-v2-detail">等待有结果的题目</small><div class="score-track"><i id="score-v2-bar"></i></div></article>
+        <article class="performance-card comparison-score"><span>两种方法相差多少</span><strong id="score-edge">—</strong><small id="score-edge-detail">只比较同一批题</small><div class="comparison-pills"><span id="score-paired">两边都作答 —</span><span id="score-primary">能核对结果 —</span></div></article>
+        <article class="performance-card capital-score"><span>两套虚拟账户目前相差多少</span><strong id="score-capital-gap">—</strong><small id="score-capital-caption">等待首次模拟账户估值</small><div class="capital-score-lines"><span>蓝色赚亏 <b id="score-v0-pnl">—</b></span><span>绿色赚亏 <b id="score-v2-pnl">—</b></span></div></article>
+      </div>
+      <div class="performance-foot"><span id="score-coverage">正在累积可比较的题目</span><span id="score-probe">可用买卖报价待检查</span><span id="score-shadow">新方法仍在测试</span><span class="performance-caveat">猜对涨跌不等于扣费后赚钱 · 只做模拟</span></div>
+      <div class="execution-ribbon" aria-label="执行与风险指标"><div><small>完成的模拟买卖</small><strong id="score-fills">—</strong></div><div><small>累计买卖费用 · 蓝 / 绿</small><strong id="score-fees">—</strong></div><div><small>曾从高点跌去多少 · 蓝 / 绿</small><strong id="score-drawdown">—</strong></div><div><small>最近一次判断耗时 · 蓝 / 绿</small><strong id="score-latency">—</strong></div></div>
+    </section>
+
+
+    <section class="hero-grid" aria-label="实时决策主画面">
+      <article class="surface price-surface">
+        <div class="surface-head"><div><span class="index-label">真实行情 / 价格证据</span><h1>比特币价格正在怎么走 <small>每一个点都来自真实成交</small></h1></div><div class="head-controls"><span class="live-badge" id="chart-live-badge"><i></i> 公开行情</span><div class="segmented" role="group" aria-label="价格图模式"><button type="button" class="active" data-price-mode="trades">每笔成交</button><button type="button" data-price-mode="candles">每分钟走势</button></div></div></div>
+        <div class="price-hero"><div class="price-chart-frame"><canvas id="price-chart" role="img" aria-label="比特币真实成交价格走势"></canvas><div class="chart-crosshair" id="price-crosshair" hidden></div><div class="chart-empty" id="price-empty">等待更多真实成交，才能画出价格线</div><div class="chart-watermark">KRAKEN / BTC USD</div></div><aside class="price-rail"><div><span>现在愿买 / 愿卖的价格</span><strong id="bid-ask">—</strong></div><div><span>买卖价差</span><strong id="spread-bps">—</strong></div><div><span>最近 90 秒主动买的比例</span><strong id="buy-share">—</strong></div><div><span>报价数量更偏买方多少</span><strong id="imbalance">—</strong></div><div><span>正在看的题目</span><strong id="selected-round">实时</strong></div></aside></div>
+        <div class="price-foot"><span id="price-range">尚无可绘制价格区间</span><span id="price-cadence">仅新增交易所逐笔时更新 · 不插值</span></div>
+      </article>
+
+      <article class="surface signal-surface" id="signal-section">
+        <div class="surface-head"><div><span class="index-label">第三步 / 同题比一比</span><h2>下一小段，价格会涨还是跌？ <small>蓝色直接 Laya · 绿色教师框架 · 紫色云端 Jev</small></h2></div><span class="engine-pill" id="engine-pill">本机 Laya + 云端 Jev</span></div>
+        <div class="signal-ledger"><div class="signal-ledger-title"><span>刚才这一题</span><strong id="signal-ledger-time">等待新一轮</strong></div><div class="signal-ledger-choices"><div class="ledger-v0"><small>蓝色 · 直接问 Laya</small><strong id="ledger-v0">—</strong></div><div class="ledger-v2"><small>绿色 · 先选方法</small><strong id="ledger-v2">—</strong></div><div class="ledger-jev"><small>紫色 · Jev 云端</small><strong id="ledger-jev">—</strong></div><div class="ledger-truth"><small>最后实际怎样</small><strong id="ledger-truth">等结果</strong></div></div><p>三路分别先保存答案，等真实价格出现后才揭晓。Jev 未调用、迟到或失败时如实标出。</p></div>
+        <div class="decision-pair"><div><small>蓝色 · 这一题</small><strong id="base-choice">等待判断</strong><span id="base-latency">—</span></div><div><small>绿色 · 这一题</small><strong id="opt-choice">等待判断</strong><span id="opt-route">—</span></div><div class="decision-jev"><small>紫色 · 这一题</small><strong id="jev-current-choice">等待判断</strong><span id="jev-current-latency">—</span></div></div>
+        <div class="signal-result"><div><small>真实价格给出的答案</small><strong id="signal-truth">等待揭晓</strong></div><div><small>双方都答了 / 所有题</small><strong id="signal-coverage">—</strong></div><button type="button" id="open-latest-round">点开这一题 ↗</button></div>
+        <div class="signal-timeline"><div class="signal-timeline-head"><span>这一题刚发生了什么</span><strong id="signal-lock-state">等待第一题</strong></div><div class="signal-timeline-grid" id="signal-timeline-grid"><span class="signal-timeline-empty">等待真实判断记录…</span></div></div>
+      </article>
+    </section>
+
+    <section class="decision-bridge" aria-label="信号与交易之间的风险边界">
+      <div class="bridge-title"><span class="index-label">关键区别 / 猜对不等于立刻买</span><strong>每 5 秒猜一次；每 30 秒才考虑模拟买卖。</strong><small>还要检查行情、风险和费用；条件不合适就保持现金。</small></div>
+      <div class="bridge-clock"><span>离下一次模拟评估</span><strong id="countdown-30">—</strong><small id="explore-version">实验规则 · 还没有证明能赚钱</small></div>
+      <div class="bridge-clock"><span>离下一次新方法检查</span><strong id="countdown-15m">—</strong><small id="shadow-status">测试中的方法不碰模拟账户</small></div>
+      <div class="bridge-action"><span>最近一次模拟动作</span><strong id="latest-action">尚无模拟买卖</strong><small id="latest-action-time">等待第一次检查</small></div>
+    </section>
+
+    <section class="first-fold-bottom" aria-label="双账户与成本门槛">
+      <div class="account-summary base-account"><div class="account-title"><span>蓝色账户</span><strong>直接问 Laya</strong></div><div class="account-equity"><small>$10,000 虚拟资金还剩</small><strong id="base-equity">—</strong><em id="base-return">—</em></div><div class="account-under"><span>现金 <b id="base-cash">—</b></span><span>比特币 <b id="base-btc">—</b></span><span>模拟成交 <b id="base-trades">—</b></span></div></div>
+      <div class="account-summary opt-account"><div class="account-title"><span>绿色账户</span><strong>先选方法</strong></div><div class="account-equity"><small>$10,000 虚拟资金还剩</small><strong id="opt-equity">—</strong><em id="opt-return">—</em></div><div class="account-under"><span>现金 <b id="opt-cash">—</b></span><span>比特币 <b id="opt-btc">—</b></span><span>模拟成交 <b id="opt-trades">—</b></span></div></div>
+      <div class="cost-wall"><div class="cost-title"><span>为什么猜对也可能亏</span><strong>买卖要付费</strong></div><div class="cost-bars"><div><span>买进再卖出的费用</span><i class="cost-track"><b id="cost-fee-bar"></b></i><strong id="roundtrip-fee">待计算</strong></div><div><span>5 秒价格通常动多少</span><i class="cost-track observed"><b id="cost-move-bar"></b></i><strong id="median-move">待积累</strong></div></div><small id="cost-note">这里只是费用假设；价格差和冲击还可能增加成本。猜对方向不等于赚到钱。</small></div>
+    </section>
+
+    <section class="section-heading" id="market-depth"><div><span class="index-label">第四步 / 核对真实行情</span><h2>市场数据真的来了，而且够新吗？</h2></div><p>左边是买卖报价，中间是交易所已经发生的成交，右边是数据是否及时。收到接口回复，不代表刚刚有人成交。</p></section>
+    <section class="detail-grid market-detail"><article class="surface"><div class="surface-head"><div><span class="index-label">当前有人愿意怎么买卖</span><h3>买卖报价表</h3></div><span id="depth-time" class="small-status">等待报价</span></div><div class="book-header"><span>愿买数量</span><span>愿买价格</span><span>愿卖价格</span><span>愿卖数量</span></div><div class="book-list" id="book-list"><div class="empty-line">等待有效报价…</div></div><div class="book-totals"><span>愿买总额 <b id="bid-depth">—</b></span><span>愿卖总额 <b id="ask-depth">—</b></span></div></article>
+      <article class="surface"><div class="surface-head"><div><span class="index-label">交易所已发生的买卖</span><h3>最新真实成交</h3></div><span class="small-status" id="tape-status">无新成交</span></div><div class="tape-header"><span>时间</span><span>买卖方向</span><span>价格 USD</span><span>数量 BTC</span></div><div class="tape-list" id="tape-list"><div class="empty-line">等待新成交…</div></div></article>
+      <article class="surface health-panel"><div class="surface-head"><div><span class="index-label">先检查数据，再相信判断</span><h3>数据新鲜吗</h3></div><span class="small-status" id="health-status">检查中</span></div><div class="health-grid" id="health-grid"></div><div class="block-chart"><div><span>每 30 秒检查账户时发生了什么</span><strong id="evaluation-count">0 次</strong></div><div class="block-bars" id="block-bars"><span>等待真实评估…</span></div></div></article></section>
+
+    <section class="section-heading" id="portfolio-section"><div><span class="index-label">第五步 / 算真实费用的模拟买卖</span><h2>同样从 $10,000 出发，哪种方法剩得多？</h2></div><p>账户先决定要不要买卖，再等一个新的有效报价来算模拟成交。这里没有向交易所发订单。</p></section>
+    <section class="detail-grid money-detail"><article class="surface equity-panel"><div class="surface-head"><div><span class="index-label">两套虚拟资金的变化</span><h3>账户余额走势</h3></div><div class="equity-legend"><span><i class="baseline-dot"></i> 蓝：直接问</span><span><i class="optimized-dot"></i> 绿：先选方法</span><span><i class="benchmark-dot"></i> 一开始买入后不动</span><span><i class="cash-dot"></i> 一直拿现金</span></div></div><div class="equity-metrics"><div><small>绿比蓝多多少</small><strong id="equity-gap">—</strong></div><div><small>蓝色账户费用</small><strong id="base-fees">—</strong></div><div><small>绿色账户费用</small><strong id="opt-fees">—</strong></div><div><small>更新到几点</small><strong id="mark-time">—</strong></div></div><div class="equity-canvas"><canvas id="equity-chart" role="img" aria-label="两套模拟账户余额与两种参考方法的曲线"></canvas><div class="chart-empty" id="equity-empty">数据还不够，暂时画不出可靠的余额曲线</div><div class="chart-tooltip" id="equity-tooltip"></div></div><div class="equity-foot" id="equity-foot">同一天从相同资金出发 · 已扣模拟费用</div></article>
+      <article class="surface order-panel"><div class="surface-head"><div><span class="index-label">每笔模拟买卖经过了什么</span><h3>想买卖 → 检查 → 记入账户</h3></div><span class="small-status" id="order-count">0 笔</span></div><div class="order-steps"><span>先决定</span><span>过安全关</span><span>等新报价</span><span>记入账户</span></div><div class="order-list" id="order-list"><div class="empty-line">等待第一次模拟买卖评估…</div></div><div class="order-note">只模拟现货买卖。看跌时只能卖掉原本持有的比特币；不会借币卖空，也没有真实订单。</div></article></section>
+
+    <section class="section-heading" id="research-section"><div><span class="index-label">第六步 / 新方法怎么证明更好</span><h2>ChatGPT 提建议后，新方法要先参加未来的考试</h2></div><p>ChatGPT 参与离线设计与检查；现在每一轮运行时没有调用 ChatGPT。新的做法先单独测试，不能拿过去的数据冒充未来成绩。</p></section>
+    <section class="detail-grid research-detail"><article class="surface research-card"><div class="surface-head"><div><span class="index-label">防止事后改题</span><h3>现在用的是哪套规则</h3></div><span class="small-status" id="version-hash">未登记</span></div><div class="manifest" id="manifest"><div class="empty-line">等待读取版本记录…</div></div><div class="teacher-state"><span>CHATGPT 的角色</span><strong>参与离线设计</strong><small>目前没有连接实时 ChatGPT 服务。电脑可以提出待测方案，但新方案必须用未来数据证明自己。</small></div></article>
+      <article class="surface research-card"><div class="surface-head"><div><span class="index-label">新方法先旁观，不碰账户</span><h3>未来数据考试</h3></div><span class="small-status" id="candidate-count">0 个待测方案</span></div><div class="candidate-list" id="candidate-list"><div class="empty-line">现在没有待测的新方案，不会编造“优化成功”。</div></div><div class="shadow-state" id="shadow-state">新方案要积累足够长时间的真实结果；当前没有证明它能带来交易收益。</div></article>
+      <article class="surface research-card"><div class="surface-head"><div><span class="index-label">每一步都留了记录</span><h3>刚刚发生了什么</h3></div><a class="export-link" href="/api/btc/export" target="_blank" rel="noopener">下载原始记录 ↗</a></div><div class="audit-events" id="audit-events"><div class="empty-line">等待真实事件…</div></div><div class="audit-note">这里是系统保存的事件；看上一轮时会显示当时的日期，不会伪装成刚刚发生。</div></article></section>
+    <section class="section-heading" id="build-guide"><div><span class="index-label">给想自己动手的人</span><h2>照着六步，也能做出能核对的版本</h2></div><p>每一步都先完成一个看得见的结果，再进入下一步。视频里可以按顺序讲，观众也能顺着复刻。</p></section>
+    <section class="build-guide-grid" aria-label="项目复刻步骤">
+      <article><span>01 / 先定规则</span><h3>什么算答对，先说清楚</h3><p>每 5 秒让两种方法猜一次；先记答案，再看真实价格。猜对次数与模拟账户盈亏分别算。</p><small>看到：两种方法回答同一道题</small></article>
+      <article><span>02 / 接真实价格</span><h3>价格必须来自交易所</h3><p>使用 Kraken 公开比特币行情，同时显示收到数据和真实成交的时间。数据太旧就暂停模拟买卖。</p><small>看到：成交价与时间一起更新</small></article>
+      <article><span>03 / 让 Laya 回答</span><h3>直接问，和先选方法，同时比赛</h3><p>两边看到的是同一份开题前信息。绿色方法会先按规则决定本轮用固定方法还是 Laya。</p><small>看到：两边答案和用时</small></article>
+      <article><span>04 / 揭晓答案</span><h3>错题也要留下</h3><p>等新的真实成交出现再判对错；平局、数据缺失和超时回答都单独标出来。</p><small>看到：猜对几次、总共算了几次</small></article>
+      <article><span>05 / 用虚拟资金试</span><h3>买卖前先算费用</h3><p>每 30 秒考虑一次模拟买卖；检查风险、新报价和费用后，才更新两个虚拟账户。</p><small>看到：账户曲线与每笔记录</small></article>
+      <article><span>06 / 再试新方法</span><h3>先用未来数据考试</h3><p>ChatGPT 参与离线设计；电脑提出的新方案先单独接受未来数据检验，没通过就不改变账户规则。</p><small>看到：待测方案和真实进度</small></article>
+    </section>
+    <footer class="terminal-footer"><span>BTC / SENTINEL · 本机研究工作台</span><span>Kraken 公开行情 · Laya 在本机运行 · 仅模拟账户</span><span id="footer-clock">—</span></footer>
+  </main>
+
+  <div class="replay-shade" id="replay-shade" hidden aria-hidden="true">正在看过去 <small>这里不是此刻的行情</small></div>
+  <aside class="story-dock" id="story-dock" hidden aria-label="视频讲解提词条"><div><small id="story-dock-count">第 1 步 / 共 6 步</small><strong id="story-dock-title">先看全流程</strong><p id="story-dock-line">真实价格进来，两种方法猜涨跌，最后核对结果。</p></div><div class="story-dock-actions"><button type="button" id="story-dock-prev" aria-label="讲解上一步">←</button><button type="button" id="story-dock-next" aria-label="讲解下一步">→</button><button type="button" id="story-dock-close" aria-label="收起讲解提词条">×</button></div></aside>
+  <div class="audit-overlay" id="audit-overlay" hidden><div class="audit-backdrop" id="audit-backdrop"></div><aside class="audit-drawer" role="dialog" aria-modal="true" aria-label="这一题的详细记录"><div class="drawer-head"><div><span class="index-label">这一题 / 可以自己核对</span><h2 id="drawer-title">这一题发生了什么</h2><small id="drawer-subtitle">—</small></div><button type="button" id="drawer-close" aria-label="关闭详细记录">×</button></div><div class="drawer-body" id="drawer-body"></div></aside></div>
+  <script src="/btc/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.venv/
+models/
+data/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.sqlite3*
+*.db*
+*.log
+*.jsonl
+validation-local/
