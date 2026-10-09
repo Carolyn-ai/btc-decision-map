@@ -1,3 +1,5 @@
+**简体中文** | [English](troubleshooting.en.md)
+
 # 常见问题
 
 | 现象 | 检查与处理 |

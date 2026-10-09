@@ -1,10 +1,12 @@
+**简体中文** | [English](README.en.md)
+
 # BTC 决策地图
 
 用真实公开行情，对比 **Laya、教师方法改进后的 Laya、Jev**，在本机展示判断过程、结果核对与虚拟账户。
 
 ## 复制到 ChatGPT，开始安装
 
-**推荐：Apple 芯片 Mac → ChatGPT 桌面端 → Codex → 本地任务。** 需要允许访问安装目录和终端；首次安装需要联网和约 2 GB 可用空间。Python 3.12–3.13，推荐 3.12。
+**推荐：Apple 芯片 Mac，以及能访问本机文件和终端的 ChatGPT / Codex 环境。** Codex 本地任务可执行安装，需要允许访问安装目录和终端；首次安装需要联网和约 2 GB 可用空间。macOS 14+，Python 3.12–3.13，推荐 3.12。
 
 复制下面这一段即可启动整个安装任务：
 
@@ -12,7 +14,7 @@
 请在我的本机安装并启动 BTC 决策地图：
 https://github.com/Carolyn-ai/btc-decision-map
 
-先确认你能访问我的本机文件和终端。在新的可写目录克隆仓库，检出 v0.1.0，阅读 README.md、AGENTS.md 和 BOOTSTRAP.md，然后按指南安装依赖、下载并验证 Laya、接入真实公开行情、启动工作台。
+先确认你能访问我的本机文件和终端。在新的可写目录克隆仓库，检出 v0.1.1，阅读 README.md、AGENTS.md 和 BOOTSTRAP.md，然后按指南安装依赖、下载并验证 Laya、接入真实公开行情、启动工作台。
 需要 Jev Key 时，打开本机配置页让我填写，不要让我把密钥发到聊天中。没有 Key 就先启动 Laya 两路。保留已有配置与记录，遇到错误按真实原因修复。最后打开网页，报告通过的检查、等待中的步骤及以后如何启动和停止。
 ```
 
@@ -34,7 +36,7 @@ https://github.com/Carolyn-ai/btc-decision-map
 ```sh
 git clone https://github.com/Carolyn-ai/btc-decision-map.git
 cd btc-decision-map
-git checkout v0.1.0
+git checkout v0.1.1
 ./setup.command
 ./start.command
 ```
@@ -44,6 +46,8 @@ git checkout v0.1.0
 可选：运行 `./configure.command`，在本机网页填写 Jev Key 和调用上限，保存后运行 `./stop.command`、`./start.command`。
 
 以后双击 `start.command` 启动，双击 `stop.command` 停止。文件夹内的 `data/` 保存你自己的记录；`.env` 保存个人配置。二者均不提交 Git。
+
+本次提供中英文文档与安装指令。工作台和本机配置页目前使用中文界面。
 
 ## 三路比较怎样理解
 

@@ -1,3 +1,5 @@
+**简体中文** | [English](AGENTS.en.md)
+
 # BTC 决策地图：执行约定
 
 - 首次安装读取 README.md、BOOTSTRAP.md；调用项目程序完成固定操作。

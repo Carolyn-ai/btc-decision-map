@@ -1,9 +1,11 @@
+**简体中文** | [English](BOOTSTRAP.en.md)
+
 # 给 ChatGPT / Codex 的本机安装指南
 
 按以下顺序完成。每一步都以实际返回为证据；需要权限时由用户在应用中授权。
 
 1. **确认本机执行。** 检查可读写目录、终端、Darwin/arm64 和 macOS 14+。若没有本机权限，先解释怎样进入桌面端 Codex 本地任务。云端容器不是用户的 Mac。
-2. **选择新目录并克隆。** 公共仓库不需要 GitHub Token。使用 `git clone https://github.com/Carolyn-ai/btc-decision-map.git`，然后检出 `v0.1.0`。已有目录先检查来源及版本；不覆盖文件或清空记录。
+2. **选择新目录并克隆。** 公共仓库不需要 GitHub Token。使用 `git clone https://github.com/Carolyn-ai/btc-decision-map.git`，然后检出 `v0.1.1`。已有目录先检查来源及版本；不覆盖文件或清空记录。
 3. **阅读本指南和 AGENTS.md。** 当前任务是运行发布版。先用现有安装程序，不临时重写决策引擎。
 4. **准备 Python。** 使用 Python 3.12–3.13，推荐 3.12。若缺少 Git/Python，解释缺少的工具与安装影响，通过官方来源准备。遵守本机权限设置；不关闭沙箱或系统防护。
 5. **运行 `./setup.command`。** 它在仓库建立独立 `.venv`，安装固定依赖，下载固定 Laya 权重，按 Hub 文件元数据校验，再执行本机模型和公开行情检查。不要链接原项目环境。网络失败保留实际错误；恢复连接后重复运行可复用已下载内容。
