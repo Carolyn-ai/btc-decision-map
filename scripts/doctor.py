@@ -54,7 +54,7 @@ def main():
     parser.add_argument("--live", action="store_true")
     args = parser.parse_args()
     checks = {"platform": {"status": "PASS" if platform.system()=="Darwin" and platform.machine()=="arm64" else "UNSUPPORTED", "system": platform.system(), "chip": platform.machine()},
-              "python": {"status": "PASS" if (3,11)<=sys.version_info<(3,14) else "UNSUPPORTED", "version": platform.python_version()},
+              "python": {"status": "PASS" if (3,12)<=sys.version_info<(3,14) else "UNSUPPORTED", "version": platform.python_version()},
               "jev": {"status": "NOT_CALLED", "enabled": setting("JEV_ENABLED", "false")=="true", "key_configured": bool(setting("AI_GATEWAY_API_KEY")), "max_calls": setting("JEV_MAX_CALLS", "60")}}
     for name in ("laya-mlx", "mlx"):
         try:
@@ -68,6 +68,12 @@ def main():
         def live():
             with urllib.request.urlopen(f"http://127.0.0.1:{PORT}/api/btc/state",timeout=10) as r:
                 state=json.load(r)
+            health=state.get("health",{})
+            rounds=state.get("signal",{}).get("rounds",[])
+            if (health.get("model_status")!="online" or health.get("db_status")!="online"
+                or not state.get("market",{}).get("ready")
+                or not any(r.get("status") in ("locked","settled") for r in rounds)):
+                raise ValueError("工作台尚未完成真实行情、模型作答与记录检查，请等待或查看 health 中的错误。")
             return {"status":"PASS", "server_time":state.get("server_time"), "health":state.get("health"), "signal_count":len(state.get("signal",{}).get("rounds",[]))}
         jobs.append(("workbench",live))
     for name, job in jobs:

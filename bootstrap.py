@@ -18,8 +18,8 @@ def main():
         raise SystemExit("本版支持 Apple 芯片 Mac。请使用支持的电脑，不以模拟模型代替。")
     if tuple(map(int, platform.mac_ver()[0].split('.')[:1])) < (14,):
         raise SystemExit("需要 macOS 14 或更新版本")
-    if not (3, 11) <= sys.version_info < (3, 14):
-        raise SystemExit("需要 Python 3.11–3.13，推荐 Python 3.12。")
+    if not (3, 12) <= sys.version_info < (3, 14):
+        raise SystemExit("需要 Python 3.12–3.13，推荐 Python 3.12。")
     if shutil.disk_usage(ROOT).free < 2 * 1024**3:
         raise SystemExit("可用磁盘不足 2 GB，请先准备安装空间。")
     env = ROOT / ".venv"
